@@ -4,7 +4,7 @@ const checkLength = function(string, maxLength){
 checkLength('javascript',7);
 
 const isPalindrome = function(string){
-  const normalString = string.replaceAll(' ','').toLoverCase();
+  const normalString = string.replaceAll(' ','').toLowerCase();
   let reversedString = '';
   for (let i = normalString.length - 1; i >= 0; i--){
     reversedString += normalString[i];
@@ -16,8 +16,8 @@ isPalindrome('Леша на полке клопа нашел');
 const isNumber = function(string){
   let result = '';
   string = string.toString();
+  string = string.replaceAll(' ', '');
   for (let i = 0; i < string.length; i++){
-    string = string.replaceAll(' ', '');
     if (!isNaN(string[i])){
       const number = parseInt(string[i], 10);
       result += number;
