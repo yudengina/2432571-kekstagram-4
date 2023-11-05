@@ -4,7 +4,7 @@ const checkLength = function(string, maxLength){
 checkLength('javascript',7);
 
 const isPalindrome = function(string){
-  const normalString = string.replaceAll(' ','').toLoverCase();
+  const normalString = string.replaceAll(' ','').toLowerCase();
   let reversedString = '';
   for (let i = normalString.length - 1; i >= 0; i--){
     reversedString += normalString[i];
