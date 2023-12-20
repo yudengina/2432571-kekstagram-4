@@ -1,28 +1,21 @@
-const checkLength = function(string, maxLength){
-  return string.length <= maxLength;
+const countOfMinutes = (time) => {
+  const timeParts = time.split(':');
+  return Number(timeParts[0]) + Number(timeParts[1]);
 };
-checkLength('javascript',7);
 
-const isPalindrome = function(string){
-  const normalString = string.replaceAll(' ','').toLowerCase();
-  let reversedString = '';
-  for (let i = normalString.length - 1; i >= 0; i--){
-    reversedString += normalString[i];
+const isMeetingTrue = (startOfWork, endOfWork, startOfMeeting, meetingDuration) => {
+  startOfWork = countOfMinutes(startOfWork);
+  endOfWork = countOfMinutes(endOfWork);
+  startOfMeeting = countOfMinutes(startOfMeeting);
+  if (startOfWork < endOfWork && startOfMeeting + meetingDuration <= endOfWork && startOfMeeting >= startOfWork) {
+    return true;
   }
-  return normalString === reversedString;
+  return false;
 };
-isPalindrome('Леша на полке клопа нашел');
 
-const isNumber = function(string){
-  let result = '';
-  string = string.toString();
-  for (let i = 0; i < string.length; i++){
-    string = string.replaceAll(' ', '');
-    if (!isNaN(string[i])){
-      const number = parseInt(string[i], 10);
-      result += number;
-    }
-  }
-  return result === '' ? NaN : result;
-};
-isNumber('2023 год');
+// Тесты
+isMeetingTrue('08:00', '17:30', '14:00', 90);
+isMeetingTrue('8:0', '10:0', '8:0', 120);
+isMeetingTrue('08:00', '14:30', '14:00', 90);
+isMeetingTrue('14:00', '17:30', '08:0', 90);
+isMeetingTrue('8:00', '17:30', '08:00', 900);
