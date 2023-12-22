@@ -2,6 +2,15 @@ import {getRandomInteger} from './util.js';
 
 const COUNT_PHOTO = 25;
 
+const DESCRIPTIONS = [
+  'Отличная фотография!',
+  'Красиво',
+  'Классно!',
+  'Не очень',
+  'Супер!',
+  'Получилось плохо',
+];
+
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -24,21 +33,7 @@ const NAMES = [
   'София',
 ];
 
-function createDiscription(){
-  let photoId = 0;
-  return function(){
-    photoId++;
-    return {
-      id: photoId,
-      url: `photos/${photoId}.jpg`,
-      description: 'Отличная фотография!',
-      likes: getRandomInteger(15,200),
-      comments: Array.from({length: getRandomInteger(0,30)}, createComments())
-    };
-  };
-}
-
-function createComments(){
+const createComments = () => {
   let commentId = 0;
   return function(){
     commentId++;
@@ -49,6 +44,22 @@ function createComments(){
       name: NAMES[getRandomInteger(0, MESSAGES.length - 1)],
     };
   };
-}
+};
 
-Array.from({length: COUNT_PHOTO}, createDiscription());
+const createDiscription = () => {
+  let photoId = 0;
+  return function(){
+    photoId++;
+    return {
+      id: photoId,
+      url: `photos/${photoId}.jpg`,
+      description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
+      likes: getRandomInteger(15,200),
+      comments: Array.from({length: getRandomInteger(0,30)}, createComments())
+    };
+  };
+};
+
+const photos = Array.from({length: COUNT_PHOTO}, createDiscription());
+
+export {photos};
