@@ -1,21 +1,17 @@
-const pictures = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const pictureFragment = document.createDocumentFragment();
 
-const createPhoto = (photo) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('img').src = photo.url;
-  pictureElement.querySelector('img').alt = photo.description;
-  pictureElement.querySelector('.picture__likes').textContent = photo.likes;
-  pictureElement.querySelector('.picture__comments').textContent = photo.comments.length;
-  return pictureElement;
-};
-
-const drawPhotos = (photos) => {
-  const element = document.createDocumentFragment();
-  photos.forEach((photo) => {
-    element.appendChild(createPhoto(photo));
+const createPictures = (descriptionPhotos, pictureContainer) => {
+  descriptionPhotos.forEach((item) => {
+    const currentPicture = pictureTemplate.cloneNode(true);
+    currentPicture.querySelector('.picture__img').src = item.url;
+    currentPicture.querySelector('.picture__img').alt = item.description;
+    currentPicture.querySelector('.picture__likes').textContent = item.likes;
+    currentPicture.querySelector('.picture__comments').textContent = item.comments.length;
+    currentPicture.dataset.thumbnailId = item.id;
+    pictureFragment.appendChild(currentPicture);
   });
-  pictures.appendChild(element);
-};
 
-export {drawPhotos};
+  pictureContainer.appendChild(pictureFragment);
+};
+export { createPictures };

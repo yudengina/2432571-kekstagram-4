@@ -1,5 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
-import { photos } from './data.js';
-import { drawPhotos } from './pictures.js';
+import {descriptionPhotos} from './data.js';
+import {renderGallery} from './gallery.js';
 
-drawPhotos(photos);
+renderGallery(descriptionPhotos());
+
