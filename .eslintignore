@@ -1,3 +1,4 @@
 webpack.config.js
 vendor/pristine.js
 vendor/pristine.min.js
+vendor/noUiSlider/nouislider.js

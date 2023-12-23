@@ -1,4 +1,6 @@
 import {onFormInput, refreshPrinstine} from './validate-form.js';
+import {initScale, deleteScale} from './zoom.js';
+import {initEffect, deleteEffect} from './effects.js';
 
 const bodyElement = document.querySelector('body');
 const formUpload = document.querySelector('.img-upload__form');
@@ -25,6 +27,8 @@ function openEditPopup () {
   document.addEventListener('keydown', onDocumentKeydown);
   cancelButtonElement.addEventListener('click', onCancelButtonClick);
   formUpload.addEventListener('submit', onFormInput);
+
+  initScale();
 }
 
 function closeEditPopup () {
@@ -35,13 +39,19 @@ function closeEditPopup () {
   document.removeEventListener('keydown', onDocumentKeydown);
   formUpload.removeEventListener('submit', onFormInput);
   cancelButtonElement.removeEventListener('click', onCancelButtonClick);
+
+  deleteScale();
+  deleteEffect();
 }
 
 function onCancelButtonClick () {
   closeEditPopup();
 }
 
-export const initEditPopup = () => {
+const initEditPopup = () => {
+  initEffect();
   fileUpload.addEventListener('change', openEditPopup);
 };
+
+export { initEditPopup };
 
