@@ -1,7 +1,9 @@
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureFragment = document.createDocumentFragment();
+const pictureContainer = document.querySelector('.pictures');
 
-const createPictures = (descriptionPhotos, pictureContainer) => {
+const createPictures = (descriptionPhotos) => {
+  pictureContainer.querySelectorAll('.picture').forEach((picture) => picture.remove());
   descriptionPhotos.forEach((item) => {
     const currentPicture = pictureTemplate.cloneNode(true);
     currentPicture.querySelector('.picture__img').src = item.url;
