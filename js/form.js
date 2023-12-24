@@ -4,6 +4,8 @@ import {pristine} from './validate-form.js';
 import {sendData} from './api.js';
 import {onSuccess, onFail} from './submit-form.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const bodyElement = document.querySelector('body');
 const formUpload = document.querySelector('.img-upload__form');
 const fileUpload = document.querySelector('.img-upload__input');
@@ -13,6 +15,27 @@ const hashtagFieldElement = document.querySelector('.text__hashtags');
 const commentFieldElement = document.querySelector('.text__description');
 const submitButtonElement = document.querySelector('.img-upload__submit');
 const errorMessageElement = document.querySelector('#error').content.querySelector('.error');
+const fileChooserElement = document.querySelector('.img-upload__start input[type=file]');
+const previewElement = document.querySelector('.img-upload__preview img');
+const effectPreviewsElement = document.querySelectorAll('.effects__preview');
+
+const onFileChooserChanged = () => {
+  const file = fileChooserElement.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    const newPictureUrl = URL.createObjectURL(file);
+    previewElement.src = newPictureUrl;
+
+    effectPreviewsElement.forEach((effect) => {
+      effect.style.backgroundImage = `url(${newPictureUrl})`;
+    });
+  }
+};
+
+fileChooserElement.addEventListener('change', onFileChooserChanged);
 
 const isFieldInFocus = () =>
   document.activeElement === hashtagFieldElement ||

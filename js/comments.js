@@ -40,16 +40,15 @@ const renderComments = () => {
   totalCommentsElement.textContent = comments.length;
 };
 
-const updateComments = (data) => {
-  comments = data.comments;
-  showComments = 0;
-  renderComments();
-};
-
 function onCommentsLoaderClick () {
   renderComments();
 }
 
-commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
+const updateComments = (data) => {
+  comments = data.comments;
+  showComments = 0;
+  renderComments();
+  commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
+};
 
 export {updateComments};

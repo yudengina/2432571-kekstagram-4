@@ -12,9 +12,11 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const onButtonClick = () => closeMessage();
+
 const onBodyClick = (evt) => {
-  const clickElem = evt.target;
-  if(clickElem.classList.contains('success__inner') || clickElem.classList.contains('error__inner')) {
+  const clickElement = evt.target;
+  if (clickElement.classList.contains('success__inner') || clickElement.classList.contains('error__inner')) {
     return;
   }
   closeMessage();
@@ -28,6 +30,8 @@ function closeMessage () {
   }
   document.removeEventListener('keydown', onDocumentKeydown);
   bodyElement.removeEventListener('click', onBodyClick);
+
+  document.querySelector('.message__button').removeEventListener('click', onButtonClick);
 }
 
 const showMessage = (messageElement, buttonElement) => {
@@ -39,7 +43,7 @@ const showMessage = (messageElement, buttonElement) => {
   }
   document.addEventListener('keydown', onDocumentKeydown);
   bodyElement.addEventListener('click', onBodyClick);
-  buttonElement.addEventListener('click', closeMessage);
+  buttonElement.addEventListener('click', onButtonClick);
 };
 
 const onSuccess = () => {
