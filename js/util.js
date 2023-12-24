@@ -21,6 +21,54 @@ const showAlert = (message) => {
   }, ALERT_TIME);
 };
 
-export { showAlert };
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+function throttle (callback, delayBetweenFrames) {
+  let lastTime = 0;
+
+  return (...rest) => {
+
+    const now = new Date();
+
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
+  };
+}
+
+function getRandomInteger (min, max) {
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
+}
+
+const getRandomElements = (elements, randomElementsCount) => {
+  const elementNumbers = [];
+  const randomElements = [];
+  for (let i = 0; i < elements.length; i++) {
+    const number = getRandomInteger(0, elements.length - 1);
+    if (elementNumbers.indexOf(number) === -1) {
+      randomElements.push(elements[number]);
+      elementNumbers.push(number);
+    }
+    if (randomElements.length === randomElementsCount) {
+      break;
+    }
+  }
+  return randomElements;
+};
+
+export { showAlert, debounce, throttle, getRandomElements };
 
 

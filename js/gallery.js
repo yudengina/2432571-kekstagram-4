@@ -14,7 +14,7 @@ const renderGallery = (pictures) => {
     showBigPicture(picture);
   });
 
-  createPictures(pictures, container);
+  createPictures(pictures);
 };
 
 export { renderGallery };
