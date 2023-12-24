@@ -72,7 +72,7 @@ const updateSlider = () => {
     },
 
     step: chosenEffect.step,
-    start: chosenEffect.min,
+    start: chosenEffect.max,
   });
 
   if (isDefault()){
